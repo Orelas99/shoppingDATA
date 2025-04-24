@@ -105,3 +105,302 @@
 
         .tableau-embed {
             background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 3rem;
+            animation: scaleIn 1s ease;
+            position: relative;
+        }
+
+        .tableau-embed iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 800px;
+            font-size: 1.5rem;
+            color: #6e8efb;
+        }
+
+        .loading-spinner::after {
+            content: '';
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #6e8efb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        .fallback {
+            color: #333;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .insights, .about {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .insights h3, .about h3 {
+            font-size: 1.8rem;
+            color: #6e8efb;
+            margin-bottom: 1rem;
+        }
+
+        .insights ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .insights ul li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .insights ul li::before {
+            content: "📈";
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .tableau-embed iframe, .loading-spinner {
+                height: 500px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav role="navigation">
+            <div class="logo">Data Analytics Hub 🚀</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#insights">Insights</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Unleash the Power of Data! 📊</h1>
+            <p>Explore our interactive Tableau dashboards and uncover actionable insights with a touch of fun! ✨</p>
+        </div>
+    </section>
+
+    <section id="dashboard">
+        <h2>Interactive Tableau Dashboard 🎉</h2>
+        <div class="tableau-embed">
+            <div class="loading-spinner">Loading Dashboard...</div>
+            <iframe 
+                src="https://public.tableau.com/views/1_17428221238400/Dashboard1?:language=en-US&publish=yes&:showVizHome=no&:display_count=n&:origin=viz_share_link" 
+                allowfullscreen
+                title="Tableau Data Analytics Dashboard"
+                loading="lazy"
+                style="display: none;"
+                onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; console.error('Failed to load primary Tableau dashboard'); loadFallbackDashboard(this);"
+            ></iframe>
+            <p class="fallback">
+                Unable to load the dashboard. Please try again later or visit <a href="https://public.tableau.com">Tableau Public</a>.
+            </p>
+        </div>
+    </section>
+
+    <section id="insights">
+        <div class="insights">
+            <h3>Key Insights 🔍</h3>
+            <ul>
+                <li>Track real-time performance metrics with ease.</li>
+                <li>Identify trends and patterns in your data.</li>
+                <li>Make data-driven decisions with confidence.</li>
+                <li>Engage with interactive visualizations.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about">
+            <h3>About Us 🌟</h3>
+            <p>We are passionate about transforming raw data into meaningful stories. Our Tableau dashboards are designed to be intuitive, engaging, and fun, helping you unlock the full potential of your data! 🚀</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© <span id="year"></span> Data Analytics Hub. All rights reserved. Made with ❤️</p>
+    </footer>
+
+    <script>
+        // Set dynamic footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in sections on scroll
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => {
+            section.style.opacity =  Evelina Judeikyte's dashboard visualizes global life expectancy trends from 1800 to 2022, highlighting improvements and regional disparities with interactive charts. 
+            Evelina Judeikyte is a Senior Data Visualization Developer at Visual Magic, known for her passion in transforming complex datasets into compelling visual stories.
+            You can explore more of her work on her <a href="https://public.tableau.com/app/profile/evelina.judeikyte/vizzes">Tableau Public profile</a> or connect with her on <a href="https://www.linkedin.com/in/evelinajudeikyte">LinkedIn</a>.
+            This dashboard is featured as a Tableau Public Viz of the Day, celebrated for its clarity and interactivity in presenting historical and regional life expectancy data.
+[](https://www.tableau.com/community/public)[](https://www.tableau.com/data-insights/dashboard-showcase)
+            </p>
+        </div>
+    </section>
+
+    <section id="insights">
+        <div class="insights">
+            <h3>Key Insights 🔍</h3>
+            <ul>
+                <li>Track real-time performance metrics with ease.</li>
+                <li>Identify trends and patterns in your data.</li>
+                <li>Make data-driven decisions with confidence.</li>
+                <li>Engage with interactive visualizations.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about">
+            <h3>About Us 🌟</h3>
+            <p>We are passionate about transforming raw data into meaningful stories. Our Tableau dashboards are designed to be intuitive, engaging, and fun, helping you unlock the full potential of your data! 🚀</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© <span id="year"></span> Data Analytics Hub. All rights reserved. Made with ❤️</p>
+    </footer>
+
+    <script>
+        // Set dynamic footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in sections on scroll
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease';
+            observer.observe(section);
+        });
+
+        // Function to load fallback dashboard
+        function loadFallbackDashboard(element) {
+            console.log('Attempting to load fallback dashboard');
+            const fallbackSrc = 'https://public.tableau.com/views/GlobalLifeExpectancy1800-2022/Dashboard1?:language=en-US&:showVizHome=no&:display_count=n&:origin=viz_share_link';
+            element.src = fallbackSrc;
+            element.onerror = () => {
+                console.error('Failed to load fallback Tableau dashboard');
+                element.style.display = 'none';
+                element.nextElementSibling.style.display = 'block';
+            };
+            element.onload = () => {
+                element.style.display = 'block';
+                element.previousElementSibling.style.display = 'none';
+            };
+        }
+    </script>
+</body>
+</html>
