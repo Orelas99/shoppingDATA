@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive data analytics dashboard with Tableau visualizations">
     <title>Data Analytics Dashboard 📊✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -159,6 +160,13 @@
             font-size: 1rem;
         }
 
+        .fallback {
+            display: none;
+            color: #333;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -202,7 +210,7 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav role="navigation">
             <div class="logo">Data Analytics Hub 🚀</div>
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -223,7 +231,15 @@
     <section id="dashboard">
         <h2>Interactive Tableau Dashboard 🎉</h2>
         <div class="tableau-embed">
-            <iframe src="https://public.tableau.com/views/1_17428221238400/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" allowfullscreen></iframe>
+            <iframe 
+                src="https://public.tableau.com/views/Superstore_17158648392960/Overview?:language=en-US&:display_count=n&:origin=viz_share_link" 
+                allowfullscreen
+                title="Tableau Data Analytics Dashboard"
+                loading="lazy"
+            ></iframe>
+            <p class="fallback">
+                Unable to load the dashboard. Please try again later or visit <a href="https://public.tableau.com">Tableau Public</a>.
+            </p>
         </div>
     </section>
 
@@ -247,10 +263,13 @@
     </section>
 
     <footer>
-        <p>© 2025 Data Analytics Hub. All rights reserved. Made with ❤️</p>
+        <p>© <span id="year"></span> Data Analytics Hub. All rights reserved. Made with ❤️</p>
     </footer>
 
     <script>
+        // Set dynamic footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -279,3 +298,5 @@
             observer.observe(section);
         });
     </script>
+</body>
+</html>
