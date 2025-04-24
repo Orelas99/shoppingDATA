@@ -232,7 +232,7 @@
         <h2>Interactive Tableau Dashboard 🎉</h2>
         <div class="tableau-embed">
             <iframe 
-                src="https://public.tableau.com/views/Superstore_17158648392960/Overview?:language=en-US&:display_count=n&:origin=viz_share_link" 
+                src="https://public.tableau.com/views/1_17428221238400/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" 
                 allowfullscreen
                 title="Tableau Data Analytics Dashboard"
                 loading="lazy"
@@ -248,55 +248,4 @@
             <h3>Key Insights 🔍</h3>
             <ul>
                 <li>Track real-time performance metrics with ease.</li>
-                <li>Identify trends and patterns in your data.</li>
-                <li>Make data-driven decisions with confidence.</li>
-                <li>Engage with interactive visualizations.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="about">
-            <h3>About Us 🌟</h3>
-            <p>We are passionate about transforming raw data into meaningful stories. Our Tableau dashboards are designed to be intuitive, engaging, and fun, helping you unlock the full potential of your data! 🚀</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>© <span id="year"></span> Data Analytics Hub. All rights reserved. Made with ❤️</p>
-    </footer>
-
-    <script>
-        // Set dynamic footer year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Fade in sections on scroll
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.2 });
-
-        sections.forEach(section => {
-            section.style.opacity = 0;
-            section.style.transform = 'translateY(50px)';
-            section.style.transition = 'all 0.8s ease';
-            observer.observe(section);
-        });
-    </script>
-</body>
-</html>
+                <li>Identify trends and patterns in your
